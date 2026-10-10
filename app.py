@@ -7,7 +7,7 @@ from debugger import debug_code
 
 app = FastAPI(
     title="Python Debugger Backend",
-    version="0.1.0",
+    version="0.2.0",
 )
 
 
@@ -18,22 +18,23 @@ def health():
     }
 
 
-@app.post("/debug", response_model=DebugResponse)
+@app.post(
+    "/debug",
+    response_model=DebugResponse
+)
 def debug(request: DebugRequest):
 
     try:
-        explanation = debug_code(
-            source_code=request.source_code,
-            error_log=request.error_log,
-            filename=request.filename,
-        )
+
+        explanation = debug_code(request)
 
         return DebugResponse(
             explanation=explanation
         )
 
     except Exception as exc:
+
         raise HTTPException(
             status_code=500,
-            detail=str(exc),
+            detail=str(exc)
         )

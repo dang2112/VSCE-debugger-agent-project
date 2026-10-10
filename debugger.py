@@ -3,6 +3,7 @@ import os
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
+from models import DebugRequest
 ##this handles the Gemini API calls
 
 
@@ -48,54 +49,60 @@ would be needed.
 """
 
 
-def build_debug_prompt(
-    source_code: str,
-    error_log: str | None = None,
-    filename: str | None = None,
-) -> str:
+def build_debug_prompt(request: DebugRequest) -> str:
 
-    filename_section = filename or "Unknown filename"
-    error_section = error_log or "No runtime error log was provided."
+    sections: list[str] = []
 
-    return f"""
-Analyze the following Python program.
-
-<filename>
-{filename_section}
-</filename>
-
-<source_code>
-{source_code}
-</source_code>
-
-<runtime_error>
-{error_section}
-</runtime_error>
-
-Identify the root cause of the problem and explain how it should be fixed.
+    sections.append(
+        """
+<problem>
+<error_log>
+%s
+</error_log>
+</problem>
 """
-
-
-def debug_code(
-    source_code: str,
-    error_log: str | None = None,
-    filename: str | None = None,
-) -> str:
-
-    prompt = build_debug_prompt(
-        source_code=source_code,
-        error_log=error_log,
-        filename=filename,
+        % (
+            request.problem.error_log
+            or "No runtime error log was provided."
+        )
     )
+
+    sections.append("<source_context>")
+
+    for source_file in request.context.files:
+
+        sections.append(
+            f"""
+<file path="{source_file.path}">
+{source_file.content}
+</file>
+"""
+        )
+
+    sections.append("</source_context>")
+
+    sections.append(
+        """
+Analyze the failure using the supplied evidence.
+
+Explain the root cause and how the developer should fix it.
+"""
+    )
+
+    return "\n".join(sections)
+
+
+def debug_code(request: DebugRequest) -> str:
+
+    prompt = build_debug_prompt(request)
 
     response = client.models.generate_content(
         model=MODEL,
         contents=prompt,
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
-            temperature=0.2, #TODO: experiment with temperature and prompts
-            #at temp 0.2 the response tends towards more deterministic over creative
+            temperature=0.2,
         ),
     )
 
-    return response.text
+    return response.text or ""
