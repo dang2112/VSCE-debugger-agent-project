@@ -1,40 +1,21 @@
-from fastapi import FastAPI, HTTPException
-
-from models import DebugRequest, DebugResponse
-from debugger import debug_code
-##this handles HTTP API endpoints that will be connected to the frontend
-
+from fastapi import FastAPI
+from api.frontend import router as debug_router
+#the app enters here
 
 app = FastAPI(
-    title="Python Debugger Backend",
-    version="0.2.0",
+    title="Debugger Workflow Backend",
+    version="0.3.0",
+)
+
+
+app.include_router( #expose these routes
+    debug_router
 )
 
 
 @app.get("/health")
 def health():
+
     return {
         "status": "ok"
     }
-
-
-@app.post(
-    "/debug",
-    response_model=DebugResponse
-)
-def debug(request: DebugRequest):
-
-    try:
-
-        explanation = debug_code(request)
-
-        return DebugResponse(
-            explanation=explanation
-        )
-
-    except Exception as exc:
-
-        raise HTTPException(
-            status_code=500,
-            detail=str(exc)
-        )
