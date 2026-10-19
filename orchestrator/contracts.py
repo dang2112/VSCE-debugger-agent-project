@@ -43,27 +43,25 @@ class RetrievalResult(BaseModel):
     )
 
 class LexicalSearchService(Protocol):
-
     def search(
         self,
         request: RetrievalQuery
-    ) -> list[RetrievalResult]:
+    ) -> RetrievalResult:
         ...
 
 
 class SemanticSearchService(Protocol):
-
     def search(
         self,
         request: RetrievalQuery
-    ) -> list[RetrievalResult]:
+    ) -> RetrievalResult:
         ...
 
-class RagService(Protocol):
 
+class RagService(Protocol):
     def search(
         self,
-        request: RetrievalQuery,
+        request: RetrievalQuery
     ) -> RetrievalResult:
         ...
 

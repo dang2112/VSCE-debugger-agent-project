@@ -1,3 +1,4 @@
+###OBSOLETE. Only used for debugging. The app does not go here.
 from pydantic import BaseModel, Field
 ##this defines the formats for receiving the request from frontend and sending the frontend the response
 

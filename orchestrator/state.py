@@ -1,7 +1,6 @@
 from enum import Enum
 from uuid import uuid4
 from pydantic import BaseModel, Field
-from typing import Protocol
 
 
 # ============================================================
@@ -46,6 +45,7 @@ class DebugProblem(BaseModel):
 
 
 class DebugContext(BaseModel):
+    workspace_path: str | None = None
     files: list[SourceFile] = Field(default_factory=list)
 
 

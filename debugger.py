@@ -1,3 +1,4 @@
+###OBSOLETE. Only used for debugging. The app does not go here.
 import os
 
 from google import genai

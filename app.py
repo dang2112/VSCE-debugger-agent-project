@@ -17,5 +17,6 @@ app.include_router( #expose these routes
 def health():
 
     return {
-        "status": "ok"
+        "status": "ok",
+        "version": "0.3.0"
     }

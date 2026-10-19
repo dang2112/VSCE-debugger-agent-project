@@ -12,7 +12,6 @@ from api.schemas import (
     CreateDebugSessionResponse,
     DebugResultResponse,
     DebugSessionStatusResponse,
-    DebugStage,
     RunDebugSessionResponse,
 )
 
