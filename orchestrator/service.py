@@ -29,18 +29,17 @@ class DebugOrchestrator:
         request: CreateDebugSessionRequest
     ) -> CreateDebugSessionResponse:
 
-        session_id = str(uuid4())
+        session = DebugSession(
+            mode=request.mode,
+            problem=request.problem,
+            context=request.context,
+        )
 
-        self.sessions[session_id] = {
-            "request": request,
-            "status": DebugStage.CREATED,
-            "patch_attempt": 0,
-            "result": None,
-        }
+        self.sessions[session.session_id] = session
 
         return CreateDebugSessionResponse(
-            session_id=session_id,
-            status=DebugStage.CREATED,
+            session_id=session.session_id,
+            status=session.stage,
         )
 
 
@@ -57,10 +56,10 @@ class DebugOrchestrator:
             return None
 
         return DebugSessionStatusResponse(
-            session_id=session_id,
-            status=session["status"],
-            patch_attempt=session["patch_attempt"],
-            max_patch_attempts=3,
+            session_id=session.session_id,
+            status=session.stage,
+            patch_attempt=len(session.patch_attempts),
+            max_patch_attempts=session.max_patch_attempts,
         )
 
 
