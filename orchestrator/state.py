@@ -219,7 +219,6 @@ class DebugSession(BaseModel):
     mode: DebugMode = DebugMode.DIRECT
 
     stage: DebugStage = DebugStage.CREATED
-
     problem: DebugProblem
     context: DebugContext
 
@@ -228,17 +227,14 @@ class DebugSession(BaseModel):
     )
 
     fault_localization: FaultLocalizationResult | None = None
-
     root_cause_analysis: RootCauseAnalysisResult | None = None
-
     repair_context: RepairContext | None = None
-
     patch_attempts: list[PatchAttempt] = Field(
         default_factory=list
     )
 
     final_status: VerificationStatus | None = None
-
     final_explanation: str | None = None
+    debugError: str | None = None #where in the pipeline did we fail? e.g Fault Localization failed because abc etc.
 
     max_patch_attempts: int = 3

@@ -50,7 +50,7 @@ def build_prompt(
         f"""
 <failure>
 <failure_type>
-{problem.failure_type}
+{problem.failure_type.value}
 </failure_type>
 
 <error_log>
