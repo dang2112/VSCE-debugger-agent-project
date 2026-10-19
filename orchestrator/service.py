@@ -13,6 +13,7 @@ from api.schemas import (
     DebugResultResponse,
     DebugSessionStatusResponse,
     RunDebugSessionResponse,
+    CancelDebugSessionResponse,
 )
 
 
@@ -72,6 +73,16 @@ class DebugOrchestrator:
 
         session = self.sessions[session_id]
 
+        if session.stage in (
+            DebugStage.COMPLETED,
+            DebugStage.CANCELLED,
+        ):
+
+            return RunDebugSessionResponse(
+                session_id=session.session_id,
+                status=session.stage,
+            )
+
         if session.mode == DebugMode.DIRECT:
 
             session.stage = DebugStage.ROOT_CAUSE_ANALYSIS
@@ -124,4 +135,34 @@ class DebugOrchestrator:
             explanation=session.final_explanation,
             patch=final_patch,
             verification_status=verification_status,
+            error=session.debug_error,
+        )
+
+    def cancel_session(
+        self,
+        session_id: str
+    ) -> CancelDebugSessionResponse:
+
+        session = self.sessions.get(session_id)
+
+        if session is None:
+            raise KeyError(session_id)
+
+
+        if session.stage in (
+            DebugStage.COMPLETED,
+            DebugStage.FAILED,
+            DebugStage.CANCELLED,
+        ):
+            return CancelDebugSessionResponse(
+                session_id=session.session_id,
+                status=session.stage,
+            )
+
+
+        session.stage = DebugStage.CANCELLED
+
+        return CancelDebugSessionResponse(
+            session_id=session.session_id,
+            status=session.stage,
         )

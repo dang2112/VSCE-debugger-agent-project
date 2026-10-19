@@ -17,6 +17,7 @@ class DebugStage(str, Enum):
     VERIFYING_PATCH = "verifying_patch"
     COMPLETED = "completed"
     FAILED = "failed"
+    CANCELLED = "cancelled"
 
 
 class FailureType(str, Enum):
@@ -235,6 +236,6 @@ class DebugSession(BaseModel):
 
     final_status: VerificationStatus | None = None
     final_explanation: str | None = None
-    debugError: str | None = None #where in the pipeline did we fail? e.g Fault Localization failed because abc etc.
+    debug_error: str | None = None #where in the pipeline did we fail? e.g Fault Localization failed because abc etc.
 
     max_patch_attempts: int = 3

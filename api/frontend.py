@@ -13,6 +13,7 @@ from api.schemas import (
     DebugResultResponse,
     DebugSessionStatusResponse,
     RunDebugSessionResponse,
+    CancelDebugSessionResponse,
 )
 
 from orchestrator.service import DebugOrchestrator
@@ -92,6 +93,27 @@ def get_debug_result(
     try:
 
         return orchestrator.get_result(
+            session_id
+        )
+
+    except KeyError:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Debug session not found"
+        )
+
+@router.post(
+    "/sessions/{session_id}/cancel",
+    response_model=CancelDebugSessionResponse
+)
+def cancel_debug_session(
+    session_id: str
+):
+
+    try:
+
+        return orchestrator.cancel_session(
             session_id
         )
 

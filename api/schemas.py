@@ -36,6 +36,11 @@ class RunDebugSessionResponse(BaseModel):
     status: DebugStage
 
 
+class CancelDebugSessionResponse(BaseModel):
+    session_id: str
+    status: DebugStage
+
+
 class DebugResultResponse(BaseModel):
     session_id: str
     status: DebugStage
@@ -43,3 +48,4 @@ class DebugResultResponse(BaseModel):
     explanation: str | None = None
     patch: str | None = None
     verification_status: VerificationStatus | None = None
+    error: str | None = None
