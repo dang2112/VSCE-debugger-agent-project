@@ -1,6 +1,7 @@
 from enum import Enum
 from uuid import uuid4
 from pydantic import BaseModel, Field
+from typing import Protocol
 
 
 # ============================================================
@@ -22,6 +23,11 @@ class DebugStage(str, Enum):
 class FailureType(str, Enum):
     RUNTIME_ERROR = "runtime_error"
     TEST_FAILURE = "test_failure"
+
+
+class DebugMode(str, Enum):
+    DIRECT = "direct"
+    AGENT = "agent"
 
 
 # ============================================================
@@ -174,6 +180,34 @@ class TestStageStatus(str, Enum):
     NOT_RUN = "not_run"
 
 # ============================================================
+# Verification
+# ============================================================
+
+class VerificationStageResult(BaseModel):
+    status: TestStageStatus
+
+    command: str | None = None
+    output: str | None = None
+
+
+class VerificationResult(BaseModel):
+    failing_tests: VerificationStageResult
+
+    regression_tests: VerificationStageResult
+
+    full_suite: VerificationStageResult
+
+    overall_status: VerificationStatus
+
+
+class PatchAttempt(BaseModel):
+    attempt_number: int
+
+    patch: GeneratedPatch
+
+    verification: VerificationResult | None = None
+
+# ============================================================
 # Complete debugging session state
 # ============================================================
 
@@ -181,6 +215,8 @@ class DebugSession(BaseModel):
     session_id: str = Field(
         default_factory=lambda: str(uuid4())
     )
+
+    mode: DebugMode = DebugMode.DIRECT
 
     stage: DebugStage = DebugStage.CREATED
 
@@ -202,5 +238,7 @@ class DebugSession(BaseModel):
     )
 
     final_status: VerificationStatus | None = None
+
+    final_explanation: str | None = None
 
     max_patch_attempts: int = 3

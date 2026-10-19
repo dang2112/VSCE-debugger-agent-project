@@ -1,5 +1,11 @@
 #placeholder orchestrator service
 from uuid import uuid4
+from agents.direct_debugger import debug_direct
+from orchestrator.state import (
+    DebugMode,
+    DebugSession,
+    DebugStage,
+)
 
 from api.schemas import (
     CreateDebugSessionRequest,
@@ -68,15 +74,26 @@ class DebugOrchestrator:
 
         session = self.sessions[session_id]
 
+        if session.mode == DebugMode.DIRECT:
+
+            session.stage = DebugStage.ROOT_CAUSE_ANALYSIS
+
+            explanation = debug_direct(
+                problem=session.problem,
+                context=session.context,
+            )
+
+            session.final_explanation = explanation
+            session.stage = DebugStage.COMPLETED
+
         # Placeholder only.
         # Actual pipeline comes later.
-        session["status"] = (
-            DebugStage.COLLECTING_EVIDENCE
-        )
+        elif session.mode == DebugMode.AGENT:
+            session.stage = DebugStage.COLLECTING_EVIDENCE
 
         return RunDebugSessionResponse(
-            session_id=session_id,
-            status=session["status"],
+            session_id=session.session_id,
+            status=session.stage,
         )
 
 
@@ -90,10 +107,23 @@ class DebugOrchestrator:
 
         session = self.sessions[session_id]
 
+        final_patch = None
+        verification_status = None
+
+        if session.patch_attempts:
+            last_attempt = session.patch_attempts[-1]
+
+            final_patch = last_attempt.patch.diff
+
+            if last_attempt.verification is not None:
+                verification_status = (
+                    last_attempt.verification.overall_status
+                )
+
         return DebugResultResponse(
-            session_id=session_id,
-            status=session["status"],
-            explanation=None,
-            patch=None,
-            verification_status=None,
+            session_id=session.session_id,
+            status=session.stage,
+            explanation=session.final_explanation,
+            patch=final_patch,
+            verification_status=verification_status,
         )

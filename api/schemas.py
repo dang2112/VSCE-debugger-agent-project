@@ -7,6 +7,9 @@ class FailureType(str, Enum):
     RUNTIME_ERROR = "runtime_error"
     TEST_FAILURE = "test_failure"
 
+class DebugMode(str, Enum):
+    DIRECT = "direct"
+    AGENT = "agent"
 
 class DebugStage(str, Enum):
     CREATED = "created"
@@ -40,7 +43,9 @@ class DebugContext(BaseModel):
     )
 
 
-class CreateDebugSessionRequest(BaseModel): #frontend sends this
+class CreateDebugSessionRequest(BaseModel):
+    mode: DebugMode = DebugMode.DIRECT
+
     problem: DebugProblem
     context: DebugContext
 
