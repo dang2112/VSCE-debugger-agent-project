@@ -12,6 +12,7 @@ class DebugStage(str, Enum):
     COLLECTING_EVIDENCE = "collecting_evidence"
     FAULT_LOCALIZATION = "fault_localization"
     ROOT_CAUSE_ANALYSIS = "root_cause_analysis"
+    REVIEWING_ANALYSIS = "reviewing_analysis"
     BUILDING_REPAIR_CONTEXT = "building_repair_context"
     GENERATING_PATCH = "generating_patch"
     VERIFYING_PATCH = "verifying_patch"
@@ -27,6 +28,7 @@ class FailureType(str, Enum):
 
 class DebugMode(str, Enum):
     DIRECT = "direct"
+    TWO_THINKING_TIMES = "two-thinking-times"
     AGENT = "agent"
 
 
