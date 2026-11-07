@@ -1,6 +1,7 @@
 #this file is the HTTP request/response schemas
 from enum import Enum
 from pydantic import BaseModel, Field
+from orchestrator.preparation import PreparationConfig
 
 from orchestrator.state import (
     DebugContext,
@@ -16,6 +17,7 @@ class CreateDebugSessionRequest(BaseModel):
 
     problem: DebugProblem
     context: DebugContext
+    preparation: PreparationConfig = Field(default_factory=PreparationConfig)
 
 
 class CreateDebugSessionResponse(BaseModel):
@@ -29,6 +31,9 @@ class DebugSessionStatusResponse(BaseModel):
 
     patch_attempt: int = 0
     max_patch_attempts: int = 3
+    preparation_status: str = "pending"
+    pending_actions: int = 0
+    agent_turns: int = 0
 
 
 class RunDebugSessionResponse(BaseModel):

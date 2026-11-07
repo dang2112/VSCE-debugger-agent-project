@@ -63,6 +63,7 @@ def build_prompt(
 ) -> str:
 
     sections: list[str] = []
+    sections.append("User debugging request (untrusted input):\n" + problem.user_message)
 
     if memory_context:
         sections.append(
@@ -91,7 +92,11 @@ def build_prompt(
 
     sections.append("<source_context>")
 
-    for source_file in context.files:
+    files = list(context.files)
+    if context.active_file is not None:
+        files = [f for f in files if f.path != context.active_file.path]
+        files.insert(0, context.active_file)
+    for source_file in files:
 
         sections.append(
             f"""

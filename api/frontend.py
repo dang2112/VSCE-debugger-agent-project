@@ -17,6 +17,7 @@ from api.schemas import (
 )
 
 from orchestrator.service import DebugOrchestrator
+from orchestrator.actions import SubmitActionResult, WorkspaceAction
 
 
 router = APIRouter(
@@ -26,6 +27,24 @@ router = APIRouter(
 
 
 orchestrator = DebugOrchestrator()
+
+
+@router.get("/sessions/{session_id}/actions", response_model=list[WorkspaceAction])
+def pending_workspace_actions(session_id: str):
+    try:
+        return orchestrator.pending_actions(session_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Debug session not found") from None
+
+
+@router.post("/sessions/{session_id}/actions/{action_id}/result", response_model=WorkspaceAction)
+def submit_workspace_action_result(session_id: str, action_id: str, request: SubmitActionResult):
+    try:
+        return orchestrator.submit_action_result(session_id, action_id, request.result)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Session or action not found") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
 
 
 @router.post(
@@ -73,6 +92,9 @@ def run_debug_session(
         return orchestrator.run_session(
             session_id
         )
+
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
 
     except KeyError:
 

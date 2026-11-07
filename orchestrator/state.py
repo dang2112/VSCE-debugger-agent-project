@@ -1,6 +1,10 @@
 from enum import Enum
 from uuid import uuid4
 from pydantic import BaseModel, Field
+from orchestrator.snapshots import SourceFile
+from orchestrator.actions import WorkspaceAction
+from orchestrator.preparation import PreparationConfig
+from typing import Literal
 
 
 # ============================================================
@@ -10,6 +14,7 @@ from pydantic import BaseModel, Field
 class DebugStage(str, Enum):
     CREATED = "created"
     COLLECTING_EVIDENCE = "collecting_evidence"
+    WAITING_FOR_CONTEXT = "waiting_for_context"
     FAULT_LOCALIZATION = "fault_localization"
     ROOT_CAUSE_ANALYSIS = "root_cause_analysis"
     REVIEWING_ANALYSIS = "reviewing_analysis"
@@ -36,19 +41,18 @@ class DebugMode(str, Enum):
 # Initial debugging problem
 # ============================================================
 
-class SourceFile(BaseModel):
-    path: str
-    content: str
-
-
 class DebugProblem(BaseModel):
     failure_type: FailureType
+    user_message: str = ""
     error_log: str | None = None
     failing_tests: list[str] = Field(default_factory=list)
 
 
 class DebugContext(BaseModel):
     workspace_path: str | None = None
+    workspace_id: str | None = None
+    workspace_uri: str | None = None
+    active_file: SourceFile | None = None
     files: list[SourceFile] = Field(default_factory=list)
 
 
@@ -239,5 +243,20 @@ class DebugSession(BaseModel):
     final_status: VerificationStatus | None = None
     final_explanation: str | None = None
     debug_error: str | None = None #where in the pipeline did we fail? e.g Fault Localization failed because abc etc.
+
+    workspace_actions: list[WorkspaceAction] = Field(default_factory=list)
+    resume_stage: DebugStage | None = None
+    agent_history: list[dict] = Field(default_factory=list)
+    agent_pending_results: dict[str, dict] = Field(default_factory=dict)
+    agent_pending_actions: dict[str, str] = Field(default_factory=dict)
+    agent_turns: int = 0
+    agent_source_chars: int = 0
+    max_agent_turns: int = Field(default=12, ge=1, le=50)
+    sbfl_run_id: str | None = None
+    preparation: PreparationConfig = Field(default_factory=PreparationConfig)
+    preparation_status: Literal["pending", "localized", "ready", "fallback", "disabled"] = "pending"
+    preparation_summary: dict = Field(default_factory=dict)
+    preload_paths: list[str] = Field(default_factory=list)
+    preload_actions: dict[str, str] = Field(default_factory=dict)
 
     max_patch_attempts: int = 3
