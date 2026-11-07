@@ -1,0 +1,8 @@
+{
+  "E:\\sbfl\\.sbfl\\network-review-tests\\test_plugin_excludes_markers_c0|E:\\sbfl\\.sbfl\\network-review-tests\\test_plugin_excludes_markers_c0": [
+    "test_target.py::test_caught",
+    "test_target.py::test_marked",
+    "test_target.py::test_shared_one",
+    "test_target.py::test_shared_two"
+  ]
+}

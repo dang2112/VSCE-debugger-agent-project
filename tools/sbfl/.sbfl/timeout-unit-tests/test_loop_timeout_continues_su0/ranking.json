@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "evidence_file": "E:\\sbfl\\.sbfl\\timeout-unit-tests\\test_loop_timeout_continues_su0\\evidence.json",
+  "total_tests": 2,
+  "excluded_tests": 1,
+  "total_failing": 1,
+  "ranking": [
+    {
+      "rank": 1,
+      "function_id": "test_loop_timeout_continues_su0/<frozen _collections_abc>::collections.abc.Collection.__subclasshook__@439",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 2,
+      "function_id": "test_loop_timeout_continues_su0/<frozen _collections_abc>::collections.abc.Reversible.__subclasshook__@345",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 3,
+      "function_id": "test_loop_timeout_continues_su0/<frozen abc>::abc.ABCMeta.__instancecheck__@117",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 4,
+      "function_id": "test_loop_timeout_continues_su0/<frozen abc>::abc.ABCMeta.__subclasscheck__@121",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 5,
+      "function_id": "test_loop_timeout_continues_su0/test_target.py::test_target.test_logic@10",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 6,
+      "function_id": "test_loop_timeout_continues_su0/<frozen os>::os._Environ.__setitem__@712",
+      "score": 0.7071067811865475,
+      "failing_covered": 1,
+      "passing_covered": 1,
+      "total_failing": 1
+    },
+    {
+      "rank": 7,
+      "function_id": "test_loop_timeout_continues_su0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+      "score": 0.7071067811865475,
+      "failing_covered": 1,
+      "passing_covered": 1,
+      "total_failing": 1
+    },
+    {
+      "rank": 8,
+      "function_id": "test_loop_timeout_continues_su0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+      "score": 0.7071067811865475,
+      "failing_covered": 1,
+      "passing_covered": 1,
+      "total_failing": 1
+    },
+    {
+      "rank": 9,
+      "function_id": "test_loop_timeout_continues_su0/target.py::target.logic@7",
+      "score": 0.7071067811865475,
+      "failing_covered": 1,
+      "passing_covered": 1,
+      "total_failing": 1
+    },
+    {
+      "rank": 10,
+      "function_id": "test_loop_timeout_continues_su0/test_target.py::test_target.test_pass@13",
+      "score": 0.0,
+      "failing_covered": 0,
+      "passing_covered": 1,
+      "total_failing": 1
+    }
+  ]
+}

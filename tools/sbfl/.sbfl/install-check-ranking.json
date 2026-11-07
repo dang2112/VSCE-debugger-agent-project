@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "evidence_file": ".sbfl\\install-check-evidence.json",
+  "total_tests": 8,
+  "total_failing": 2,
+  "ranking": [
+    {
+      "rank": 1,
+      "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+      "score": 0.5,
+      "failing_covered": 2,
+      "passing_covered": 6,
+      "total_failing": 2
+    },
+    {
+      "rank": 2,
+      "function_id": "shopping/discount.py::shopping.discount.apply_discount@25",
+      "score": 0.35355339059327373,
+      "failing_covered": 1,
+      "passing_covered": 3,
+      "total_failing": 2
+    },
+    {
+      "rank": 3,
+      "function_id": "shopping/pricing.py::shopping.pricing.apply_tax@12",
+      "score": 0.35355339059327373,
+      "failing_covered": 1,
+      "passing_covered": 3,
+      "total_failing": 2
+    },
+    {
+      "rank": 4,
+      "function_id": "shopping/pricing.py::shopping.pricing.calculate_total@18",
+      "score": 0.35355339059327373,
+      "failing_covered": 1,
+      "passing_covered": 3,
+      "total_failing": 2
+    },
+    {
+      "rank": 5,
+      "function_id": "shopping/pricing.py::shopping.pricing.subtotal@6",
+      "score": 0.35355339059327373,
+      "failing_covered": 1,
+      "passing_covered": 3,
+      "total_failing": 2
+    }
+  ]
+}

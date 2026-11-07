@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "source_root": "E:\\sbfl\\.sbfl\\network-review-tests\\test_plugin_excludes_markers_c0",
+  "pytest_exitstatus": 1,
+  "tests": [
+    {
+      "nodeid": "test_target.py::test_caught",
+      "outcome": "skipped",
+      "covered_functions": [],
+      "invocations": [],
+      "failure": {
+        "type": "Skipped",
+        "message": "requires internet"
+      },
+      "excluded_from_ranking": true,
+      "exclusion_reason": "requires_internet",
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_logic",
+      "outcome": "failed",
+      "covered_functions": [
+        "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+        "test_plugin_excludes_markers_c0/test_target.py::test_target.test_logic@27"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+          "function_name": "os._Environ.__setitem__",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 712,
+          "arguments": {
+            "self": "environ({'ACSETUPSVCPORT': '23210', 'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Roaming', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'CHOCOLATEYINSTALL': 'C:\\\\Prog...",
+            "key": "'PYTEST_CURRENT_TEST'",
+            "value": "'test_target.py::test_logic (call)'"
+          },
+          "executed_lines": [
+            713,
+            714,
+            715,
+            716
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+          "function_name": "os._create_environ_mapping.<locals>.encodekey",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 778,
+          "arguments": {
+            "key": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            779
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'test_target.py::test_logic (call)'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'test_target.py::test_logic (call)'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/test_target.py::test_target.test_logic@27",
+          "function_name": "test_target.test_logic",
+          "file": "test_plugin_excludes_markers_c0/test_target.py",
+          "first_line": 27,
+          "arguments": {},
+          "executed_lines": [
+            27
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": {
+            "type": "AssertionError",
+            "message": "AssertionError('assert False')",
+            "line": "27"
+          }
+        }
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "assert False"
+      },
+      "excluded_from_ranking": false,
+      "exclusion_reason": null,
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_marked",
+      "outcome": "skipped",
+      "covered_functions": [],
+      "invocations": [],
+      "failure": {
+        "type": "Skipped",
+        "message": "requires internet"
+      },
+      "excluded_from_ranking": true,
+      "exclusion_reason": "requires_internet",
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_shared_one",
+      "outcome": "skipped",
+      "covered_functions": [],
+      "invocations": [],
+      "failure": {
+        "type": "Skipped",
+        "message": "requires internet"
+      },
+      "excluded_from_ranking": true,
+      "exclusion_reason": "requires_internet",
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_shared_two",
+      "outcome": "skipped",
+      "covered_functions": [],
+      "invocations": [],
+      "failure": {
+        "type": "Skipped",
+        "message": "requires internet"
+      },
+      "excluded_from_ranking": true,
+      "exclusion_reason": "requires_internet",
+      "network_attempts": []
+    }
+  ]
+}

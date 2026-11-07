@@ -1,0 +1,659 @@
+{
+  "schema_version": 1,
+  "source_root": "E:\\sbfl\\src\\shopping",
+  "pytest_exitstatus": 1,
+  "tests": [
+    {
+      "nodeid": "tests/demo/test_discount.py::test_loyalty_discount_above_second_threshold",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "1500"
+          },
+          "executed_lines": [
+            14,
+            18,
+            19
+          ],
+          "local_changes": [],
+          "return_value": "0.15",
+          "exception": null
+        }
+      ],
+      "failure": null
+    },
+    {
+      "nodeid": "tests/demo/test_discount.py::test_loyalty_discount_below_threshold",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "200"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            22
+          ],
+          "local_changes": [],
+          "return_value": "0.0",
+          "exception": null
+        }
+      ],
+      "failure": null
+    },
+    {
+      "nodeid": "tests/demo/test_discount.py::test_loyalty_discount_boundary_1000",
+      "outcome": "failed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "1000"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            21
+          ],
+          "local_changes": [],
+          "return_value": "0.1",
+          "exception": null
+        }
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "assert 0.1 == 0.15\n +  where 0.1 = loyalty_discount_rate(1000)"
+      }
+    },
+    {
+      "nodeid": "tests/demo/test_discount.py::test_loyalty_discount_first_threshold",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "500"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            21
+          ],
+          "local_changes": [],
+          "return_value": "0.1",
+          "exception": null
+        }
+      ],
+      "failure": null
+    },
+    {
+      "nodeid": "tests/demo/test_pricing.py::test_total_boundary_1000_points",
+      "outcome": "failed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.apply_discount@25",
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+        "shopping/pricing.py::shopping.pricing.apply_tax@12",
+        "shopping/pricing.py::shopping.pricing.calculate_total@18",
+        "shopping/pricing.py::shopping.pricing.subtotal@6"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/pricing.py::shopping.pricing.calculate_total@18",
+          "function_name": "shopping.pricing.calculate_total",
+          "file": "shopping/pricing.py",
+          "first_line": 18,
+          "arguments": {
+            "prices": "[40.0, 60.0]",
+            "loyalty_points": "1000",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            23,
+            24,
+            25,
+            26
+          ],
+          "local_changes": [
+            {
+              "line": 24,
+              "name": "base",
+              "old": null,
+              "new": "100.0"
+            },
+            {
+              "line": 25,
+              "name": "discount_rate",
+              "old": null,
+              "new": "0.1"
+            },
+            {
+              "line": 26,
+              "name": "discounted",
+              "old": null,
+              "new": "90.0"
+            }
+          ],
+          "return_value": "90.0",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.subtotal@6",
+          "function_name": "shopping.pricing.subtotal",
+          "file": "shopping/pricing.py",
+          "first_line": 6,
+          "arguments": {
+            "prices": "[40.0, 60.0]"
+          },
+          "executed_lines": [
+            7,
+            9
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "1000"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            21
+          ],
+          "local_changes": [],
+          "return_value": "0.1",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.apply_discount@25",
+          "function_name": "shopping.discount.apply_discount",
+          "file": "shopping/discount.py",
+          "first_line": 25,
+          "arguments": {
+            "amount": "100.0",
+            "rate": "0.1"
+          },
+          "executed_lines": [
+            26,
+            28,
+            30
+          ],
+          "local_changes": [],
+          "return_value": "90.0",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.apply_tax@12",
+          "function_name": "shopping.pricing.apply_tax",
+          "file": "shopping/pricing.py",
+          "first_line": 12,
+          "arguments": {
+            "amount": "90.0",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            13,
+            15
+          ],
+          "local_changes": [],
+          "return_value": "90.0",
+          "exception": null
+        }
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "assert 90.0 == 85.0\n +  where 90.0 = calculate_total([40.0, 60.0], 1000)"
+      }
+    },
+    {
+      "nodeid": "tests/demo/test_pricing.py::test_total_with_fifteen_percent_discount",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.apply_discount@25",
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+        "shopping/pricing.py::shopping.pricing.apply_tax@12",
+        "shopping/pricing.py::shopping.pricing.calculate_total@18",
+        "shopping/pricing.py::shopping.pricing.subtotal@6"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/pricing.py::shopping.pricing.calculate_total@18",
+          "function_name": "shopping.pricing.calculate_total",
+          "file": "shopping/pricing.py",
+          "first_line": 18,
+          "arguments": {
+            "prices": "[40.0, 60.0]",
+            "loyalty_points": "1500",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            23,
+            24,
+            25,
+            26
+          ],
+          "local_changes": [
+            {
+              "line": 24,
+              "name": "base",
+              "old": null,
+              "new": "100.0"
+            },
+            {
+              "line": 25,
+              "name": "discount_rate",
+              "old": null,
+              "new": "0.15"
+            },
+            {
+              "line": 26,
+              "name": "discounted",
+              "old": null,
+              "new": "85.0"
+            }
+          ],
+          "return_value": "85.0",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.subtotal@6",
+          "function_name": "shopping.pricing.subtotal",
+          "file": "shopping/pricing.py",
+          "first_line": 6,
+          "arguments": {
+            "prices": "[40.0, 60.0]"
+          },
+          "executed_lines": [
+            7,
+            9
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "1500"
+          },
+          "executed_lines": [
+            14,
+            18,
+            19
+          ],
+          "local_changes": [],
+          "return_value": "0.15",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.apply_discount@25",
+          "function_name": "shopping.discount.apply_discount",
+          "file": "shopping/discount.py",
+          "first_line": 25,
+          "arguments": {
+            "amount": "100.0",
+            "rate": "0.15"
+          },
+          "executed_lines": [
+            26,
+            28,
+            30
+          ],
+          "local_changes": [],
+          "return_value": "85.0",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.apply_tax@12",
+          "function_name": "shopping.pricing.apply_tax",
+          "file": "shopping/pricing.py",
+          "first_line": 12,
+          "arguments": {
+            "amount": "85.0",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            13,
+            15
+          ],
+          "local_changes": [],
+          "return_value": "85.0",
+          "exception": null
+        }
+      ],
+      "failure": null
+    },
+    {
+      "nodeid": "tests/demo/test_pricing.py::test_total_with_ten_percent_discount",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.apply_discount@25",
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+        "shopping/pricing.py::shopping.pricing.apply_tax@12",
+        "shopping/pricing.py::shopping.pricing.calculate_total@18",
+        "shopping/pricing.py::shopping.pricing.subtotal@6"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/pricing.py::shopping.pricing.calculate_total@18",
+          "function_name": "shopping.pricing.calculate_total",
+          "file": "shopping/pricing.py",
+          "first_line": 18,
+          "arguments": {
+            "prices": "[40.0, 60.0]",
+            "loyalty_points": "500",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            23,
+            24,
+            25,
+            26
+          ],
+          "local_changes": [
+            {
+              "line": 24,
+              "name": "base",
+              "old": null,
+              "new": "100.0"
+            },
+            {
+              "line": 25,
+              "name": "discount_rate",
+              "old": null,
+              "new": "0.1"
+            },
+            {
+              "line": 26,
+              "name": "discounted",
+              "old": null,
+              "new": "90.0"
+            }
+          ],
+          "return_value": "90.0",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.subtotal@6",
+          "function_name": "shopping.pricing.subtotal",
+          "file": "shopping/pricing.py",
+          "first_line": 6,
+          "arguments": {
+            "prices": "[40.0, 60.0]"
+          },
+          "executed_lines": [
+            7,
+            9
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "500"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            21
+          ],
+          "local_changes": [],
+          "return_value": "0.1",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.apply_discount@25",
+          "function_name": "shopping.discount.apply_discount",
+          "file": "shopping/discount.py",
+          "first_line": 25,
+          "arguments": {
+            "amount": "100.0",
+            "rate": "0.1"
+          },
+          "executed_lines": [
+            26,
+            28,
+            30
+          ],
+          "local_changes": [],
+          "return_value": "90.0",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.apply_tax@12",
+          "function_name": "shopping.pricing.apply_tax",
+          "file": "shopping/pricing.py",
+          "first_line": 12,
+          "arguments": {
+            "amount": "90.0",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            13,
+            15
+          ],
+          "local_changes": [],
+          "return_value": "90.0",
+          "exception": null
+        }
+      ],
+      "failure": null
+    },
+    {
+      "nodeid": "tests/demo/test_pricing.py::test_total_without_discount",
+      "outcome": "passed",
+      "covered_functions": [
+        "shopping/discount.py::shopping.discount.apply_discount@25",
+        "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+        "shopping/pricing.py::shopping.pricing.apply_tax@12",
+        "shopping/pricing.py::shopping.pricing.calculate_total@18",
+        "shopping/pricing.py::shopping.pricing.subtotal@6"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "shopping/pricing.py::shopping.pricing.calculate_total@18",
+          "function_name": "shopping.pricing.calculate_total",
+          "file": "shopping/pricing.py",
+          "first_line": 18,
+          "arguments": {
+            "prices": "[40.0, 60.0]",
+            "loyalty_points": "0",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            23,
+            24,
+            25,
+            26
+          ],
+          "local_changes": [
+            {
+              "line": 24,
+              "name": "base",
+              "old": null,
+              "new": "100.0"
+            },
+            {
+              "line": 25,
+              "name": "discount_rate",
+              "old": null,
+              "new": "0.0"
+            },
+            {
+              "line": 26,
+              "name": "discounted",
+              "old": null,
+              "new": "100.0"
+            }
+          ],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.subtotal@6",
+          "function_name": "shopping.pricing.subtotal",
+          "file": "shopping/pricing.py",
+          "first_line": 6,
+          "arguments": {
+            "prices": "[40.0, 60.0]"
+          },
+          "executed_lines": [
+            7,
+            9
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.loyalty_discount_rate@4",
+          "function_name": "shopping.discount.loyalty_discount_rate",
+          "file": "shopping/discount.py",
+          "first_line": 4,
+          "arguments": {
+            "points": "0"
+          },
+          "executed_lines": [
+            14,
+            18,
+            20,
+            22
+          ],
+          "local_changes": [],
+          "return_value": "0.0",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "shopping/discount.py::shopping.discount.apply_discount@25",
+          "function_name": "shopping.discount.apply_discount",
+          "file": "shopping/discount.py",
+          "first_line": 25,
+          "arguments": {
+            "amount": "100.0",
+            "rate": "0.0"
+          },
+          "executed_lines": [
+            26,
+            28,
+            30
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": 1,
+          "function_id": "shopping/pricing.py::shopping.pricing.apply_tax@12",
+          "function_name": "shopping.pricing.apply_tax",
+          "file": "shopping/pricing.py",
+          "first_line": 12,
+          "arguments": {
+            "amount": "100.0",
+            "tax_rate": "0.0"
+          },
+          "executed_lines": [
+            13,
+            15
+          ],
+          "local_changes": [],
+          "return_value": "100.0",
+          "exception": null
+        }
+      ],
+      "failure": null
+    }
+  ]
+}

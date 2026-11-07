@@ -1,0 +1,621 @@
+{
+  "schema_version": 1,
+  "source_root": "E:\\BugsInPy\\framework\\bin\\temp\\youtube-dl\\youtube_dl",
+  "pytest_exitstatus": 1,
+  "tests": [
+    {
+      "nodeid": "test/test_utils.py::TestUtil::test_unescape_html",
+      "outcome": "failed",
+      "covered_functions": [
+        "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+        "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+        "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'%20;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'%20;'",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'&#x2F;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+          "function_name": "youtube_dl.utils.unescapeHTML.<locals>.<lambda>",
+          "file": "youtube_dl/utils.py",
+          "first_line": 599,
+          "arguments": {
+            "m": "<re.Match object; span=(0, 6), match='&#x2F;'>"
+          },
+          "executed_lines": [
+            599
+          ],
+          "local_changes": [],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 3,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+          "function_name": "youtube_dl.utils._htmlentity_transform",
+          "file": "youtube_dl/utils.py",
+          "first_line": 562,
+          "arguments": {
+            "entity_with_semicolon": "'#x2F;'"
+          },
+          "executed_lines": [
+            564,
+            567,
+            572,
+            575,
+            576,
+            577,
+            578,
+            579,
+            580,
+            584,
+            585
+          ],
+          "local_changes": [
+            {
+              "line": 567,
+              "name": "entity",
+              "old": null,
+              "new": "'#x2F'"
+            },
+            {
+              "line": 576,
+              "name": "mobj",
+              "old": null,
+              "new": "<re.Match object; span=(0, 4), match='#x2F'>"
+            },
+            {
+              "line": 578,
+              "name": "numstr",
+              "old": null,
+              "new": "'x2F'"
+            },
+            {
+              "line": 580,
+              "name": "base",
+              "old": null,
+              "new": "16"
+            },
+            {
+              "line": 584,
+              "name": "numstr",
+              "old": "'x2F'",
+              "new": "'0x2F'"
+            }
+          ],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'&#47;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 6,
+          "parent_call_id": 5,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+          "function_name": "youtube_dl.utils.unescapeHTML.<locals>.<lambda>",
+          "file": "youtube_dl/utils.py",
+          "first_line": 599,
+          "arguments": {
+            "m": "<re.Match object; span=(0, 5), match='&#47;'>"
+          },
+          "executed_lines": [
+            599
+          ],
+          "local_changes": [],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 7,
+          "parent_call_id": 6,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+          "function_name": "youtube_dl.utils._htmlentity_transform",
+          "file": "youtube_dl/utils.py",
+          "first_line": 562,
+          "arguments": {
+            "entity_with_semicolon": "'#47;'"
+          },
+          "executed_lines": [
+            564,
+            567,
+            572,
+            575,
+            576,
+            577,
+            578,
+            582,
+            584,
+            585
+          ],
+          "local_changes": [
+            {
+              "line": 567,
+              "name": "entity",
+              "old": null,
+              "new": "'#47'"
+            },
+            {
+              "line": 576,
+              "name": "mobj",
+              "old": null,
+              "new": "<re.Match object; span=(0, 3), match='#47'>"
+            },
+            {
+              "line": 578,
+              "name": "numstr",
+              "old": null,
+              "new": "'47'"
+            },
+            {
+              "line": 584,
+              "name": "base",
+              "old": null,
+              "new": "10"
+            }
+          ],
+          "return_value": "'/'",
+          "exception": null
+        },
+        {
+          "call_id": 8,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'&eacute;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'\u00e9'",
+          "exception": null
+        },
+        {
+          "call_id": 9,
+          "parent_call_id": 8,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+          "function_name": "youtube_dl.utils.unescapeHTML.<locals>.<lambda>",
+          "file": "youtube_dl/utils.py",
+          "first_line": 599,
+          "arguments": {
+            "m": "<re.Match object; span=(0, 8), match='&eacute;'>"
+          },
+          "executed_lines": [
+            599
+          ],
+          "local_changes": [],
+          "return_value": "'\u00e9'",
+          "exception": null
+        },
+        {
+          "call_id": 10,
+          "parent_call_id": 9,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+          "function_name": "youtube_dl.utils._htmlentity_transform",
+          "file": "youtube_dl/utils.py",
+          "first_line": 562,
+          "arguments": {
+            "entity_with_semicolon": "'eacute;'"
+          },
+          "executed_lines": [
+            564,
+            567,
+            568
+          ],
+          "local_changes": [
+            {
+              "line": 567,
+              "name": "entity",
+              "old": null,
+              "new": "'eacute'"
+            }
+          ],
+          "return_value": "'\u00e9'",
+          "exception": null
+        },
+        {
+          "call_id": 11,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'&#2013266066;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'&#2013266066;'",
+          "exception": null
+        },
+        {
+          "call_id": 12,
+          "parent_call_id": 11,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+          "function_name": "youtube_dl.utils.unescapeHTML.<locals>.<lambda>",
+          "file": "youtube_dl/utils.py",
+          "first_line": 599,
+          "arguments": {
+            "m": "<re.Match object; span=(0, 13), match='&#2013266066;'>"
+          },
+          "executed_lines": [
+            599
+          ],
+          "local_changes": [],
+          "return_value": "'&#2013266066;'",
+          "exception": null
+        },
+        {
+          "call_id": 13,
+          "parent_call_id": 12,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+          "function_name": "youtube_dl.utils._htmlentity_transform",
+          "file": "youtube_dl/utils.py",
+          "first_line": 562,
+          "arguments": {
+            "entity_with_semicolon": "'#2013266066;'"
+          },
+          "executed_lines": [
+            564,
+            567,
+            572,
+            575,
+            576,
+            577,
+            578,
+            582,
+            584,
+            585,
+            586,
+            587,
+            590
+          ],
+          "local_changes": [
+            {
+              "line": 567,
+              "name": "entity",
+              "old": null,
+              "new": "'#2013266066'"
+            },
+            {
+              "line": 576,
+              "name": "mobj",
+              "old": null,
+              "new": "<re.Match object; span=(0, 11), match='#2013266066'>"
+            },
+            {
+              "line": 578,
+              "name": "numstr",
+              "old": null,
+              "new": "'2013266066'"
+            },
+            {
+              "line": 584,
+              "name": "base",
+              "old": null,
+              "new": "10"
+            }
+          ],
+          "return_value": "'&#2013266066;'",
+          "exception": {
+            "type": "ValueError",
+            "message": "ValueError('chr() arg not in range(0x110000)')",
+            "line": "585"
+          }
+        },
+        {
+          "call_id": 14,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+          "function_name": "youtube_dl.utils.unescapeHTML",
+          "file": "youtube_dl/utils.py",
+          "first_line": 593,
+          "arguments": {
+            "s": "'&a&quot;'"
+          },
+          "executed_lines": [
+            594,
+            596,
+            598,
+            599,
+            598
+          ],
+          "local_changes": [],
+          "return_value": "'&a&quot;'",
+          "exception": null
+        },
+        {
+          "call_id": 15,
+          "parent_call_id": 14,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+          "function_name": "youtube_dl.utils.unescapeHTML.<locals>.<lambda>",
+          "file": "youtube_dl/utils.py",
+          "first_line": 599,
+          "arguments": {
+            "m": "<re.Match object; span=(0, 8), match='&a&quot;'>"
+          },
+          "executed_lines": [
+            599
+          ],
+          "local_changes": [],
+          "return_value": "'&a&quot;'",
+          "exception": null
+        },
+        {
+          "call_id": 16,
+          "parent_call_id": 15,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+          "function_name": "youtube_dl.utils._htmlentity_transform",
+          "file": "youtube_dl/utils.py",
+          "first_line": 562,
+          "arguments": {
+            "entity_with_semicolon": "'a&quot;'"
+          },
+          "executed_lines": [
+            564,
+            567,
+            572,
+            575,
+            576,
+            590
+          ],
+          "local_changes": [
+            {
+              "line": 567,
+              "name": "entity",
+              "old": null,
+              "new": "'a&quot'"
+            },
+            {
+              "line": 576,
+              "name": "mobj",
+              "old": null,
+              "new": "None"
+            }
+          ],
+          "return_value": "'&a&quot;'",
+          "exception": null
+        }
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "'&a&quot;' != '&a\"'\n- &a&quot;\n+ &a\"\n"
+      }
+    },
+    {
+      "nodeid": "test/test_utils.py::TestUtil::test_url_basename",
+      "outcome": "passed",
+      "covered_functions": [
+        "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://foo.de/'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/'"
+            }
+          ],
+          "return_value": "''",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://foo.de/bar/baz'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/bar/baz'"
+            }
+          ],
+          "return_value": "'baz'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://foo.de/bar/baz?x=y'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/bar/baz'"
+            }
+          ],
+          "return_value": "'baz'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://foo.de/bar/baz#x=y'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/bar/baz'"
+            }
+          ],
+          "return_value": "'baz'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://foo.de/bar/baz/'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/bar/baz/'"
+            }
+          ],
+          "return_value": "'baz'",
+          "exception": null
+        },
+        {
+          "call_id": 6,
+          "parent_call_id": null,
+          "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+          "function_name": "youtube_dl.utils.url_basename",
+          "file": "youtube_dl/utils.py",
+          "first_line": 1749,
+          "arguments": {
+            "url": "'http://media.w3.org/2010/05/sintel/trailer.mp4'"
+          },
+          "executed_lines": [
+            1750,
+            1751
+          ],
+          "local_changes": [
+            {
+              "line": 1751,
+              "name": "path",
+              "old": null,
+              "new": "'/2010/05/sintel/trailer.mp4'"
+            }
+          ],
+          "return_value": "'trailer.mp4'",
+          "exception": null
+        }
+      ],
+      "failure": null
+    }
+  ]
+}

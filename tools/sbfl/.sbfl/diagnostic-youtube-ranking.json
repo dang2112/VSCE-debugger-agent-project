@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_file": "E:\\sbfl\\.sbfl\\diagnostic-youtube-evidence.json",
+  "total_tests": 2,
+  "total_failing": 1,
+  "ranking": [
+    {
+      "rank": 1,
+      "function_id": "youtube_dl/utils.py::youtube_dl.utils._htmlentity_transform@562",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 2,
+      "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML.<locals>.<lambda>@599",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 3,
+      "function_id": "youtube_dl/utils.py::youtube_dl.utils.unescapeHTML@593",
+      "score": 1.0,
+      "failing_covered": 1,
+      "passing_covered": 0,
+      "total_failing": 1
+    },
+    {
+      "rank": 4,
+      "function_id": "youtube_dl/utils.py::youtube_dl.utils.url_basename@1749",
+      "score": 0.0,
+      "failing_covered": 0,
+      "passing_covered": 1,
+      "total_failing": 1
+    }
+  ]
+}

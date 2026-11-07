@@ -1,0 +1,175 @@
+Metadata-Version: 2.4
+Name: sbfl-demo-project
+Version: 0.1.0
+Summary: Minimal function-level SBFL + runtime trace collector demo
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pytest>=8.0
+
+# Function-level SBFL + Runtime Trace Demo
+
+This repository is a small, complete vertical slice for the debugging-agent project:
+
+1. a deliberately buggy Python application,
+2. a pytest suite with passing and failing tests,
+3. a per-test runtime trace + function coverage collector,
+4. function-level Ochiai suspiciousness ranking,
+5. JSON artifacts that can later be consumed by the RCA Agent.
+
+## Project layout
+
+```text
+src/
+  shopping/                 # deliberately buggy target application
+  sbfl/                     # reusable SBFL + trace module
+tests/
+  demo/                     # intentionally contains failing tests
+  unit/                     # tests for the SBFL engine itself
+.sbfl/                      # generated artifacts
+```
+
+## Setup
+
+Requires Python 3.10 or newer. Run these commands from the repository root.
+
+### Windows (PowerShell)
+
+```powershell
+cd E:\sbfl
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\sbfl.exe --help
+```
+
+Replace `E:\sbfl` with your checkout's path. If `.venv` already exists and its
+Python works, skip creating it. If `py` is unavailable, use `python` instead.
+The editable install installs pytest and creates the `sbfl` command.
+
+These commands do not require activation or a PowerShell execution-policy change.
+To use the shorter commands in the rest of this README, optionally activate with:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+If activation is blocked, keep using the explicit executable paths:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests/unit -q
+.\.venv\Scripts\sbfl.exe run --source-root src/shopping -- tests/demo -q
+```
+
+### Linux/macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+```
+
+## 1. Confirm the demo bug
+
+```bash
+pytest tests/demo -q
+```
+
+Expected result: **6 passed, 2 failed**. The known bug is in
+`shopping.discount.loyalty_discount_rate`: `1000` points incorrectly receives 10% instead of 15%.
+
+## 2. Collect per-test coverage + execution traces
+
+```bash
+sbfl collect --source-root src/shopping -- tests/demo -q
+```
+
+Artifacts are written to:
+
+```text
+.sbfl/test_evidence.json
+```
+
+Each test stores:
+
+- pass/fail status,
+- covered application functions,
+- invocation blocks,
+- arguments,
+- executed lines,
+- selected local changes,
+- return value / exception.
+
+The demo pytest process exits non-zero because two tests intentionally fail. The `sbfl collect`
+command still writes the evidence and returns success if collection itself completed correctly.
+
+## 3. Compute Ochiai suspiciousness
+
+```bash
+sbfl rank
+```
+
+or run both stages:
+
+```bash
+sbfl run --source-root src/shopping -- tests/demo -q
+```
+
+The expected top suspicious function is:
+
+```text
+shopping/discount.py::loyalty_discount_rate
+```
+
+Generated ranking:
+
+```text
+.sbfl/suspiciousness.json
+```
+
+## 4. Inspect one failing runtime trace
+
+List recorded test node IDs:
+
+```bash
+sbfl tests
+```
+
+Then:
+
+```bash
+sbfl trace "tests/demo/test_discount.py::test_loyalty_discount_boundary_1000"
+```
+
+## Ochiai
+
+For function `f`:
+
+```text
+Ochiai(f) = nf(f) / sqrt(Nf * (nf(f) + np(f)))
+```
+
+where:
+
+- `Nf`: total failing tests,
+- `nf(f)`: failing tests that execute `f`,
+- `np(f)`: passing tests that execute `f`.
+
+This module performs **function-level** SBFL. The trace collector is separate evidence for the future
+RCA Agent; SBFL itself only needs per-test coverage + pass/fail outcomes.
+
+## Reusing this on another project
+
+Install this package into the target environment and point `--source-root` at the application code:
+
+```bash
+sbfl run --source-root path/to/your/package -- tests -q
+```
+
+Phase-1 assumptions:
+
+- pytest can reproduce the failure,
+- the environment is already initialized,
+- the target fault is in application code,
+- tracing the main pytest thread is sufficient.
+
+The current tracer intentionally avoids advanced concurrency tracing, native frames, and subprocess
+instrumentation. Those can be added later without changing the Ochiai engine.

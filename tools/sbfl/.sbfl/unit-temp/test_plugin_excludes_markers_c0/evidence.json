@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "source_root": "E:\\sbfl\\.sbfl\\unit-temp\\test_plugin_excludes_markers_c0",
+  "pytest_exitstatus": 1,
+  "tests": [
+    {
+      "nodeid": "test_target.py::test_caught",
+      "outcome": "passed",
+      "covered_functions": [
+        "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+        "test_plugin_excludes_markers_c0/test_target.py::test_target.test_caught@16"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+          "function_name": "os._Environ.__setitem__",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 712,
+          "arguments": {
+            "self": "environ({'ACSETUPSVCPORT': '23210', 'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Roaming', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'CHOCOLATEYINSTALL': 'C:\\\\Prog...",
+            "key": "'PYTEST_CURRENT_TEST'",
+            "value": "'test_target.py::test_caught (call)'"
+          },
+          "executed_lines": [
+            713,
+            714,
+            715,
+            716
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+          "function_name": "os._create_environ_mapping.<locals>.encodekey",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 778,
+          "arguments": {
+            "key": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            779
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'test_target.py::test_caught (call)'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'test_target.py::test_caught (call)'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/test_target.py::test_target.test_caught@16",
+          "function_name": "test_target.test_caught",
+          "file": "test_plugin_excludes_markers_c0/test_target.py",
+          "first_line": 16,
+          "arguments": {},
+          "executed_lines": [
+            17,
+            18,
+            19,
+            20
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": {
+            "type": "ExternalNetworkBlocked",
+            "message": "ExternalNetworkBlocked('External network blocked: example.com')",
+            "line": "18"
+          }
+        }
+      ],
+      "failure": null,
+      "excluded_from_ranking": true,
+      "exclusion_reason": "external_network_attempt",
+      "network_attempts": [
+        {
+          "operation": "getaddrinfo",
+          "host": "example.com"
+        }
+      ]
+    },
+    {
+      "nodeid": "test_target.py::test_logic",
+      "outcome": "failed",
+      "covered_functions": [
+        "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+        "test_plugin_excludes_markers_c0/test_target.py::test_target.test_logic@25"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+          "function_name": "os._Environ.__setitem__",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 712,
+          "arguments": {
+            "self": "environ({'ACSETUPSVCPORT': '23210', 'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Roaming', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'CHOCOLATEYINSTALL': 'C:\\\\Prog...",
+            "key": "'PYTEST_CURRENT_TEST'",
+            "value": "'test_target.py::test_logic (call)'"
+          },
+          "executed_lines": [
+            713,
+            714,
+            715,
+            716
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+          "function_name": "os._create_environ_mapping.<locals>.encodekey",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 778,
+          "arguments": {
+            "key": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            779
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'test_target.py::test_logic (call)'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'test_target.py::test_logic (call)'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/test_target.py::test_target.test_logic@25",
+          "function_name": "test_target.test_logic",
+          "file": "test_plugin_excludes_markers_c0/test_target.py",
+          "first_line": 25,
+          "arguments": {},
+          "executed_lines": [
+            25
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": {
+            "type": "AssertionError",
+            "message": "AssertionError('assert False')",
+            "line": "25"
+          }
+        }
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "assert False"
+      },
+      "excluded_from_ranking": false,
+      "exclusion_reason": null,
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_marked",
+      "outcome": "skipped",
+      "covered_functions": [],
+      "invocations": [],
+      "failure": {
+        "type": "Skipped",
+        "message": "requires internet"
+      },
+      "excluded_from_ranking": true,
+      "exclusion_reason": "requires_internet",
+      "network_attempts": []
+    },
+    {
+      "nodeid": "test_target.py::test_shared_one",
+      "outcome": "passed",
+      "covered_functions": [
+        "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+        "test_plugin_excludes_markers_c0/test_target.py::test_target.test_shared_one@13"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+          "function_name": "os._Environ.__setitem__",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 712,
+          "arguments": {
+            "self": "environ({'ACSETUPSVCPORT': '23210', 'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Roaming', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'CHOCOLATEYINSTALL': 'C:\\\\Prog...",
+            "key": "'PYTEST_CURRENT_TEST'",
+            "value": "'test_target.py::test_shared_one (call)'"
+          },
+          "executed_lines": [
+            713,
+            714,
+            715,
+            716
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+          "function_name": "os._create_environ_mapping.<locals>.encodekey",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 778,
+          "arguments": {
+            "key": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            779
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'test_target.py::test_shared_one (call)'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'test_target.py::test_shared_one (call)'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/test_target.py::test_target.test_shared_one@13",
+          "function_name": "test_target.test_shared_one",
+          "file": "test_plugin_excludes_markers_c0/test_target.py",
+          "first_line": 13,
+          "arguments": {
+            "online": "1"
+          },
+          "executed_lines": [
+            13
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        }
+      ],
+      "failure": null,
+      "excluded_from_ranking": true,
+      "exclusion_reason": "network_dependent_fixture",
+      "network_attempts": [
+        {
+          "operation": "getaddrinfo",
+          "host": "example.com"
+        }
+      ]
+    },
+    {
+      "nodeid": "test_target.py::test_shared_two",
+      "outcome": "passed",
+      "covered_functions": [
+        "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+        "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+        "test_plugin_excludes_markers_c0/test_target.py::test_target.test_shared_two@14"
+      ],
+      "invocations": [
+        {
+          "call_id": 1,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._Environ.__setitem__@712",
+          "function_name": "os._Environ.__setitem__",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 712,
+          "arguments": {
+            "self": "environ({'ACSETUPSVCPORT': '23210', 'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Roaming', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'CHOCOLATEYINSTALL': 'C:\\\\Prog...",
+            "key": "'PYTEST_CURRENT_TEST'",
+            "value": "'test_target.py::test_shared_two (call)'"
+          },
+          "executed_lines": [
+            713,
+            714,
+            715,
+            716
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        },
+        {
+          "call_id": 2,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.encodekey@778",
+          "function_name": "os._create_environ_mapping.<locals>.encodekey",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 778,
+          "arguments": {
+            "key": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            779
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 3,
+          "parent_call_id": 2,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'PYTEST_CURRENT_TEST'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'PYTEST_CURRENT_TEST'",
+          "exception": null
+        },
+        {
+          "call_id": 4,
+          "parent_call_id": 1,
+          "function_id": "test_plugin_excludes_markers_c0/<frozen os>::os._create_environ_mapping.<locals>.check_str@772",
+          "function_name": "os._create_environ_mapping.<locals>.check_str",
+          "file": "test_plugin_excludes_markers_c0/<frozen os>",
+          "first_line": 772,
+          "arguments": {
+            "value": "'test_target.py::test_shared_two (call)'"
+          },
+          "executed_lines": [
+            773,
+            775
+          ],
+          "local_changes": [],
+          "return_value": "'test_target.py::test_shared_two (call)'",
+          "exception": null
+        },
+        {
+          "call_id": 5,
+          "parent_call_id": null,
+          "function_id": "test_plugin_excludes_markers_c0/test_target.py::test_target.test_shared_two@14",
+          "function_name": "test_target.test_shared_two",
+          "file": "test_plugin_excludes_markers_c0/test_target.py",
+          "first_line": 14,
+          "arguments": {
+            "online": "1"
+          },
+          "executed_lines": [
+            14
+          ],
+          "local_changes": [],
+          "return_value": "None",
+          "exception": null
+        }
+      ],
+      "failure": null,
+      "excluded_from_ranking": true,
+      "exclusion_reason": "network_dependent_fixture",
+      "network_attempts": []
+    }
+  ]
+}
