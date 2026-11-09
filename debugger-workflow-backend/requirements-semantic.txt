@@ -1,0 +1,2 @@
+# Optional; install explicitly to enable document_semantic_search.
+sentence-transformers>=5.0

@@ -1,4 +1,29 @@
+# Credentials and local configuration
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+# Python and test output
 __pycache__/
+*.py[cod]
 .venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+.sbfl/
 session_memory/
+# Extension dependencies and build output
+node_modules/
+out/
+dist/
+.vscode-test/
+*.vsix
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,109 @@
+{
+  "name": "llm-vsce-project-frontend",
+  "displayName": "llm-vsce-project-frontend",
+  "description": "frontend for a vsc extension for a python llm debugger",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.138.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pythonDebugAgent",
+          "title": "Python Debug Agent",
+          "icon": "media/media.svg"
+        }
+      ]
+    },
+    "views": {
+      "pythonDebugAgent": [
+        {
+          "type": "webview",
+          "id": "pythonDebugAgent.debugView",
+          "name": "Debugger",
+          "icon": "media/media.svg"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Python Debug Agent",
+      "properties": {
+        "pythonDebugAgent.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "Debugger backend HTTP URL."
+        },
+        "pythonDebugAgent.mode": {
+          "type": "string",
+          "enum": [
+            "agent",
+            "direct",
+            "two-thinking-times"
+          ],
+          "default": "agent",
+          "description": "Initial debug mode in the chat panel."
+        },
+        "pythonDebugAgent.repairEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initially enable patch generation and isolated test verification in agent mode."
+        },
+        "pythonDebugAgent.sbflEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run initial SBFL preparation in agent mode."
+        },
+        "pythonDebugAgent.sourceRoot": {
+          "type": "string",
+          "default": ".",
+          "description": "Application source root relative to the selected file\u2019s workspace folder."
+        },
+        "pythonDebugAgent.testTargets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "tests"
+          ],
+          "minItems": 1,
+          "description": "Pytest suite selectors relative to the workspace. Includes passing and failing tests."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "test:unit": "npm run compile && node --test test/*.test.cjs"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.138.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    }
+  }
+}
