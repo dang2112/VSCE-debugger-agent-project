@@ -114,7 +114,7 @@ class VerificationService:
             env['DEBUGGER_TEST_RESULTS'] = str(results)
             env.pop('PYTEST_ADDOPTS', None)
             env.pop('PYTEST_PLUGINS', None)
-            args = ['-m', 'pytest', '-o', 'addopts=', '-p', '_debugger_verification_plugin', '-q', '--', *selectors]
+            args = ['-m', 'pytest', '--rootdir', str(workspace), '-p', 'no:cacheprovider', '-o', 'addopts=', '-p', '_debugger_verification_plugin', '-q', '--', *selectors]
             code = PythonProcessRunner(self.python)._execute(args, workspace, env, log, timeout, is_cancelled)
             with log.open('r', encoding='utf-8', errors='replace') as stream:
                 output = stream.read(16000)

@@ -10,6 +10,9 @@ from orchestrator.snapshots import SourceFile
 class ReadFileArguments(BaseModel):
     model_config = ConfigDict(extra="forbid")
     path: str = Field(min_length=1)
+    start_line: int = Field(default=1, ge=1)
+    end_line: int | None = Field(default=None, ge=1)
+    search: str | None = Field(default=None, min_length=1, max_length=200)
 
     @field_validator("path")
     @classmethod

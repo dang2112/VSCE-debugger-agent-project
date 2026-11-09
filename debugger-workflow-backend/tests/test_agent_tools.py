@@ -150,3 +150,34 @@ class AgentToolTests(unittest.TestCase):
         self.assertEqual(sent[2].parts[0].function_response.id, "call-0")
         self.assertEqual(sent[2].parts[0].function_response.response, {"content": "source"})
         self.assertEqual(history[2]["role"], "tool")  # Existing memory remains readable.
+
+
+    def test_late_source_range_survives_action_pause_and_restart(self):
+        source = 'prefix = 0\n' * 3000 + 'def target():\n    return 42\n'
+        with patch('orchestrator.service.agent_turn', return_value=calls(('read_file', {
+            'path': 'large.py', 'start_line': 3001, 'end_line': 3002}))):
+            self.assertEqual(self.service.run_session(self.sid).status, DebugStage.WAITING_FOR_CONTEXT)
+        action = self.service.pending_actions(self.sid)[0]
+        self.service.submit_action_result(self.sid, action.action_id,
+            ReadFileResult(file=SourceFile(path='large.py', content=source, document_version=7)))
+        self.service = self.cls(MemoryStore(self.directory.name))
+        with patch('orchestrator.service.agent_turn', return_value=answer()) as model:
+            self.service.run_session(self.sid)
+        result = model.call_args.args[0][-2]['parts'][0]['function_response']['response']
+        self.assertEqual(result['file']['content'], 'def target():\n    return 42\n')
+        self.assertEqual(result['start_line'], 3001)
+        self.assertEqual(result['file']['document_version'], 7)
+        session = self.store.load(self.sid).session
+        self.assertEqual(session.context.files[0].content, source)
+        self.assertTrue(any(e.source == 'agent.read_file' and 'def target' in e.content for e in session.evidence))
+
+    def test_source_search_locates_symbols_after_initial_prefix(self):
+        from agents.context_preparation import source_excerpt
+        from orchestrator.actions import ReadFileArguments
+        source = 'padding = 0\n' * 3000 + 'def _parse_mpd_formats():\n    return []\n'
+        content, metadata = source_excerpt(source, ReadFileArguments(path='large.py', search='_parse_mpd_formats'), 24000)
+        self.assertIn('def _parse_mpd_formats', content)
+        self.assertEqual(metadata['matching_lines'], [3001])
+        self.assertGreater(metadata['start_line'], 1)
+        with self.assertRaisesRegex(ValueError, 'budget exhausted'):
+            source_excerpt(source, ReadFileArguments(path='large.py'), 0)

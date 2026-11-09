@@ -57,3 +57,33 @@ def traceback_paths(error_log: str | None, workspace_path: str | None) -> list[s
         except (ValueError, OSError):
             continue
     return paths
+
+
+def source_excerpt(content, arguments, budget):
+    """Select source lines or locate a literal without discarding the full snapshot."""
+    lines = content.splitlines(keepends=True)
+    matches = [i + 1 for i, line in enumerate(lines) if arguments.search in line] if arguments.search else []
+    start = arguments.start_line
+    if arguments.search and start == 1 and matches:
+        start = max(1, matches[0] - 10)
+    end = arguments.end_line or len(lines)
+    if end < start:
+        raise ValueError('end_line must be at least start_line')
+    if lines and start > len(lines):
+        raise ValueError('start_line exceeds the file line count')
+    if budget <= 0:
+        raise ValueError('Session source context budget exhausted')
+    selected = ''.join(lines[start - 1:end])
+    excerpt = selected[:budget]
+    included = excerpt.splitlines(keepends=True)
+    last = start + len(included) - 1
+    partial = bool(included and not included[-1].endswith(('\n', '\r')) and len(excerpt) < len(selected))
+    return excerpt, {
+        'start_line': start, 'end_line': max(start - 1, last), 'total_lines': len(lines),
+        'original_chars': len(content), 'truncated': excerpt != content,
+        'next_start_line': last + 1 if last < len(lines) and not partial else None,
+        'last_line_partial': partial, 'matching_lines': matches[:50],
+        'search_found': bool(matches) if arguments.search else None,
+        'content_is_excerpt': excerpt != content,
+        'source_basis': 'versioned editor snapshot; hashes refer to the full file',
+    }

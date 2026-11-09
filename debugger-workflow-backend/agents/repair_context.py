@@ -17,7 +17,7 @@ def build_repair_context(problem, diagnosis, evidence, context) -> RepairContext
             editable_path(file.path)
         except ValueError:
             continue
-        if len(file.content) > 100000:
+        if len(file.content) > 200000:
             raise ValueError('Source snapshot exceeds the repair context limit: ' + file.path)
         relevant.append(file)
         if len(relevant) == 10:

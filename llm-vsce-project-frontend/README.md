@@ -42,7 +42,7 @@ Settings use the `pythonDebugAgent` prefix:
 - `sbflEnabled`: initial automatic localization in agent mode; default true.
 - `sourceRoot`: workspace-relative application source root; default `.`. Use `src`
   or a package directory when applicable.
-- `testTargets`: pytest suite selectors; default `["tests"]`. Includes passing
+- `testTargets`: pytest suite selectors; default `["."]` (pytest discovery from the workspace). Includes passing
   and failing tests for localization and full-suite verification.
 
 Use failure details for traceback output and optional failing pytest selectors.
@@ -106,3 +106,19 @@ are not deleted. Cancel an active run before resetting. Debug options are retain
 Agent sessions automatically load a bounded metadata-only project overview before
 SBFL/analysis, even if SBFL preparation is disabled. Source contents are loaded
 separately from the active editor and requested relevant files.
+
+### Test discovery and Python environment
+
+The default test target `.` lets pytest discover tests, including projects using
+`test/` rather than `tests/`. Explicit `pythonDebugAgent.testTargets` settings still
+take precedence; update older workspace settings if they name a missing directory.
+Failing-test selectors must be relative to the open workspace. Open the actual
+project root when possible. Collection failures are not verified fixes.
+
+Tests run using the backend interpreter unless `SBFL_PYTHON_EXECUTABLE` is set.
+`VERIFICATION_PYTHON_EXECUTABLE` can override it for repair verification. Set both
+to the target project's Python executable when its dependencies or Python version
+differ from the backend, and restart the backend. The target environment needs
+pytest and the project's test dependencies. Legacy BugsInPy projects may require
+a compatible older Python version. These variables select an existing environment;
+the debugger does not install dependencies automatically.

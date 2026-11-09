@@ -72,3 +72,28 @@ class VerificationTests(unittest.TestCase):
         self.assertEqual(result.overall_status, VerificationStatus.UNVERIFIED)
         self.assertIn('modified a captured input', result.error)
         self.assertEqual((self.workspace / 'calc.py').read_text(), ORIGINAL)
+
+
+    def test_default_discovery_finds_singular_test_directory(self):
+        (self.workspace / 'tests').rename(self.workspace / 'test')
+        snapshot = self.snapshot()
+        baseline = self.verifier.reproduce(snapshot, [], self.config)
+        self.assertEqual(baseline.status, TestStageStatus.FAILED, baseline.output or baseline.reason)
+        self.assertIn('test/test_calc.py::test_fraction', baseline.outcomes)
+        failures = [node for node, outcome in baseline.outcomes.items() if outcome == 'failed']
+        result = self.verifier.verify(snapshot, self.patch(ORIGINAL.replace('//', '/')), failures, baseline, self.config)
+        self.assertEqual(result.overall_status, VerificationStatus.PASSED, result.model_dump())
+
+    def test_nested_pytest_config_keeps_workspace_relative_node_ids(self):
+        nested = self.workspace / 'nested'
+        nested.mkdir()
+        (self.workspace / 'tests').rename(nested / 'tests')
+        (nested / 'pytest.ini').write_text('[pytest]\npythonpath = ..\n')
+        self.config.test_targets = ['nested/tests']
+        snapshot = self.snapshot()
+        baseline = self.verifier.reproduce(snapshot, [], self.config)
+        self.assertEqual(baseline.status, TestStageStatus.FAILED, baseline.output or baseline.reason)
+        failures = [node for node, outcome in baseline.outcomes.items() if outcome == 'failed']
+        self.assertEqual(failures, ['nested/tests/test_calc.py::test_fraction'])
+        result = self.verifier.verify(snapshot, self.patch(ORIGINAL.replace('//', '/')), failures, baseline, self.config)
+        self.assertEqual(result.overall_status, VerificationStatus.PASSED, result.model_dump())

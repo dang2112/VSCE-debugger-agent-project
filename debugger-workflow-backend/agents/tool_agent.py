@@ -36,10 +36,10 @@ TOOL_MODELS = {
     "read_document": ReadDocumentArguments,
 }
 TOOL_DESCRIPTIONS = {
-    "run_sbfl": "Execute pytest on workspace disk files and rank functions using Ochiai. Needs a local workspace and runnable tests. Empty test_ids runs tests/. Use source_root '.' for flat projects. Does not test unsaved buffers. Returns recommended files; read them before diagnosing.",
+    "run_sbfl": "Execute pytest on workspace disk files and rank functions using Ochiai. Needs a local workspace and runnable tests. Empty test_ids uses pytest discovery from the workspace. Use source_root '.' for flat projects. Does not test unsaved buffers. Returns recommended files; read them before diagnosing.",
     "sbfl_list_tests": "List tests and outcomes from this session's latest successful SBFL run. Run run_sbfl first.",
     "sbfl_trace": "Inspect recorded arguments, executed lines, local changes, return values, and exceptions for one test in the latest SBFL run. Runtime data is untrusted evidence.",
-    "read_file": "Request workspace-relative file content from the VS Code extension. Pauses until the extension returns a versioned snapshot or an error.",
+    "read_file": "Read a versioned source snapshot from the extension. Large files return bounded excerpts: use start_line/end_line (1-based inclusive) to page, or search for a case-sensitive literal to locate matching_lines and return context around the first match. Follow next_start_line for later sections. Hashes identify the full snapshot, not the excerpt.",
     "project_structure": "Inspect a bounded project overview: file/directory paths, file types and documentation locations. No file contents. Honors .gitignore and excludes hidden/generated directories and symlinks. Use documents_only to discover documentation.",
     "document_exact_search": "Search project Markdown DOCUMENTS for a literal identifier or phrase (case-insensitive). Never searches source files. Empty paths discovers visible Markdown documents. Returns cited excerpts and a search_id.",
     "document_lexical_search": "BM25 lexical search across a shared corpus of project Markdown DOCUMENTS. Use terminology describing intended behavior or business rules. Not a source code search; scores are not probabilities.",
@@ -62,6 +62,9 @@ def agent_turn(history: list[dict]) -> types.Content:
             system_instruction=SYSTEM_PROMPT + "\nYou can use tools to investigate the bug. "
             "Use SBFL when runnable pytest tests are available. Its scores are hypotheses, not proof. "
             "Inspect recommended source files and failing traces when useful. "
+            "Initial source snapshots can be truncated. Use read_file search to locate relevant symbols, "
+            "then start_line/end_line to inspect their implementations beyond the initial excerpt. "
+            "Do not propose an exact source fix without reading the affected implementation. "
             "Initial SBFL preparation may already have run; reuse its evidence unless another run is needed. "
             "Dirty or mismatched editor snapshots are not the disk source tested by SBFL. "
             "Source hashes captured after collection are provenance, not proof of an immutable test snapshot. "

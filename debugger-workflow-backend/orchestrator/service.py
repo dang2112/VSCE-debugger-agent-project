@@ -4,7 +4,7 @@ from uuid import uuid4
 from google.genai import types
 from agents.direct_debugger import build_prompt, debug_direct, review_debug_analysis
 from agents.tool_agent import agent_turn, TOOL_MODELS
-from agents.context_preparation import bounded_context, source_evidence, traceback_paths
+from agents.context_preparation import bounded_context, source_evidence, traceback_paths, source_excerpt
 from agents.rca import analyze_root_cause
 from agents.repair_context import build_repair_context
 from agents.patch_generator import generate_patch
@@ -455,11 +455,19 @@ class DebugOrchestrator:
                     if result.get("type") == "read_file":
                         file = result["file"]
                         remaining = max(0, session.preparation.max_source_context_chars - session.agent_source_chars)
-                        original_chars = len(file["content"])
-                        content = file["content"][:min(remaining, session.preparation.max_file_chars)]
-                        result = {**result, "file": {**file, "content": content},
-                                  "original_chars": original_chars, "truncated": len(content) < original_chars}
-                        session.agent_source_chars += len(content)
+                        try:
+                            arguments = ReadFileArguments.model_validate(call.args or {})
+                            content, excerpt_metadata = source_excerpt(file["content"], arguments,
+                                min(remaining, session.preparation.max_file_chars))
+                            result = {**result, "file": {**file, "content": content}, **excerpt_metadata}
+                            session.agent_source_chars += len(content)
+                            session.evidence.append(EvidenceItem(type=EvidenceType.SOURCE_CODE,
+                                source="agent.read_file", path=file["path"], content=content,
+                                metadata={**excerpt_metadata, "provided_content_hash": file.get("content_hash"),
+                                          "document_version": file.get("document_version"),
+                                          "is_dirty": file.get("is_dirty")}))
+                        except ValueError as exc:
+                            result = {"error": {"code": "source_excerpt", "message": str(exc)}}
                     result = self._bounded_result(result)
                     session.agent_pending_results[key] = result
                     self.memory.save(session, MemoryEntry(

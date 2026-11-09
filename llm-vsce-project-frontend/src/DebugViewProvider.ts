@@ -127,7 +127,7 @@ export class DebugViewProvider implements vscode.WebviewViewProvider, vscode.Dis
         if (failingTests.length > 100) { throw new Error('Specify at most 100 failing test selectors.'); }
         for (const test of failingTests) { relativeWorkspacePath(test.split('::')[0]); }
         const config = vscode.workspace.getConfiguration('pythonDebugAgent', root.uri);
-        const testTargets = config.get<string[]>('testTargets', ['tests']);
+        const testTargets = config.get<string[]>('testTargets', ['.']);
         for (const test of testTargets) {
             const target = test.split('::')[0];
             if (target !== '.') { relativeWorkspacePath(target); }

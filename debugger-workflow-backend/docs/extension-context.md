@@ -125,3 +125,21 @@ process; the existing memory store is not designed for concurrent writers.
 Agent mode now automatically localizes and preloads files before analysis. See
 [sbfl-agent.md](sbfl-agent.md) for preparation configuration, fallback behavior,
 and the shared source context limits.
+
+
+## Large source files
+
+The extension still returns the full versioned snapshot (within its existing file-size
+limit). The agent-facing `read_file` tool can select 1-based inclusive `start_line`
+and `end_line`, or use `search` for a case-sensitive literal such as a function name.
+Search returns matching line numbers (up to 50) and context near the first match;
+subsequent calls can select another match's line range. Responses include the actual
+line range, total lines, truncation, and next page line. Each response and the total
+session source context remain bounded. Initial editor/preload context is a prefix,
+so the agent must request later sections when relevant. Full snapshots remain stored
+for hashes and patch validation; excerpts do not replace them. Returned source hashes
+refer to the full file. Exhausted source budgets produce an explicit tool error.
+
+Repair allows a source file up to 200,000 characters and retains the 200,000-character
+total source budget. Larger contexts are refused rather than silently patched from
+truncated sources.

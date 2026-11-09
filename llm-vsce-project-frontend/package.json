@@ -70,10 +70,10 @@
             "type": "string"
           },
           "default": [
-            "tests"
+            "."
           ],
           "minItems": 1,
-          "description": "Pytest suite selectors relative to the workspace. Includes passing and failing tests."
+          "description": "Pytest selectors relative to the workspace. Default . discovers tests using pytest naming and project configuration; set explicit paths or node IDs to narrow the suite."
         }
       }
     }

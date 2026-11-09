@@ -39,3 +39,21 @@ class RepairContractTests(unittest.TestCase):
         diff = ''.join(difflib.unified_diff(original.splitlines(True), fixed.splitlines(True),
                     fromfile='a/calc.py', tofile='b/calc.py', n=1))
         self.assertEqual(apply_diff(diff, {'calc.py': original})['calc.py'], fixed)
+
+
+    def test_large_source_repair_uses_full_snapshot_with_bounded_total(self):
+        from agents.repair_context import build_repair_context
+        from orchestrator.state import DebugContext
+        content = '# padding\n' * 12300
+        diagnosis = RootCauseAnalysisResult(hypothesis=RootCauseHypothesis(summary='Wrong value',
+            root_cause_file='calc.py', supporting_evidence_ids=[self.evidence.id]),
+            inspected_evidence_ids=[self.evidence.id])
+        context = DebugContext(files=[SourceFile(path='calc.py', content=content)])
+        repair = build_repair_context(DebugProblem(failure_type=FailureType.TEST_FAILURE),
+            diagnosis, [self.evidence], context)
+        self.assertEqual(repair.relevant_files[0].content, content)
+        self.assertEqual(repair.source_hashes['calc.py'], source_hash(content))
+        context.files[0].content = 'x' * 200001
+        with self.assertRaisesRegex(ValueError, 'repair context limit'):
+            build_repair_context(DebugProblem(failure_type=FailureType.TEST_FAILURE),
+                diagnosis, [self.evidence], context)

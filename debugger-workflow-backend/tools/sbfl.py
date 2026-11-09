@@ -84,7 +84,7 @@ class SBFLService(PythonProcessRunner):
         if not (ENGINE_SOURCE / "sbfl" / "pytest_plugin.py").is_file():
             raise ValueError("SBFL checkout missing: expected tools/sbfl/src/sbfl")
         source = self.workspace_path(workspace, arguments.source_root, directory=True)
-        tests = arguments.test_ids or ["tests"]
+        tests = arguments.test_ids or ["."]
         for test in tests:
             self.workspace_path(workspace, test.split("::", 1)[0])
         run_id = uuid4().hex
@@ -99,7 +99,7 @@ class SBFLService(PythonProcessRunner):
         env.update(SBFL_SOURCE_ROOT=str(source), SBFL_OUTPUT=str(evidence_path),
                    SBFL_EXCLUDE_INTERNET="1" if arguments.exclude_internet else "0",
                    SBFL_TEST_TIMEOUT=str(arguments.test_timeout_seconds))
-        command = ["-m", "pytest", "-o", "addopts=", "-p", "sbfl.pytest_plugin", "-q", "--", *tests]
+        command = ["-m", "pytest", "--rootdir", str(workspace), "-p", "no:cacheprovider", "-o", "addopts=", "-p", "sbfl.pytest_plugin", "-q", "--", *tests]
         started = time.monotonic()
         code = self._execute(command, workspace, env, directory / "pytest.log", arguments.timeout_seconds, is_cancelled)
         # 1 means the target's tests failed, which is useful SBFL evidence.
